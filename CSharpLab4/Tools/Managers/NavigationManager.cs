@@ -1,0 +1,40 @@
+﻿using CSharpLab4.Tools.Navigation;
+
+namespace CSharpLab4.Tools.Managers
+{
+    internal class NavigationManager
+    {
+        private static readonly object Locker = new object();
+        private static NavigationManager _instance;
+
+        internal static NavigationManager Instance
+        {
+            get
+            {
+                if (_instance != null)
+                    return _instance;
+                 lock (Locker)
+                 {
+                     return _instance ?? (_instance = new NavigationManager());
+                 }
+            }
+        }
+
+        private INavigationModel _navigationModel;
+
+        internal void Initialize(INavigationModel navigationModel)
+        {
+            _navigationModel = navigationModel;
+        }
+
+        internal void Navigate(ViewType viewType)
+        {
+            _navigationModel.Navigate(viewType);
+        }
+
+        private NavigationManager()
+        {
+        }
+
+    }
+}
