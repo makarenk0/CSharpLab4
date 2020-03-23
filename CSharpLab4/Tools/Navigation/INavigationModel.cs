@@ -3,7 +3,8 @@
     internal enum ViewType
     {
         UserAdding,
-        UsersTable  
+        UsersTable,
+        UserEditing
     }
 
     interface INavigationModel

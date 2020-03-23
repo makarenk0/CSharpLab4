@@ -1,15 +1,18 @@
 ﻿using CSharpLab4.Exceptions;
 using CSharpLab4.Models;
+using CSharpLab4.Tools.DataStorage;
 using CSharpLab4.Tools.Managers;
 using CSharpLab4.Tools.MVVM;
 using CSharpLab4.Tools.Navigation;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CSharpLab4.ViewModel
+namespace CSharpLab4.ViewModel.Registration
 {
-    internal class UserAddingViewModel : BaseViewModel
+    internal class UserEditingViewModel : BaseViewModel
     {
         private Person _person;
 
@@ -19,17 +22,31 @@ namespace CSharpLab4.ViewModel
         private DateTime _birthDateField = System.DateTime.UtcNow;
 
         private RelayCommand<object> _proceedCommand;
-        private RelayCommand<object> _confirmCommand;
+        private RelayCommand<object> _editCommand;
         private RelayCommand<object> _backCommand;
         private RelayCommand<object> _closeCommand;
-        
 
+        public UserEditingViewModel()
+        {
+            TableUpdate.InitEdit = StartEditingUser;
+        }
+
+        public void StartEditingUser()
+        {
+            Person p = StationManager.DataStorage.GetUser(TableUpdate.userToChange);
+            NameField = p.Name;
+            SurnameField = p.Surname;
+            EmailField = p.Email;
+            BirthDateField = p.BirthDate;
+            ProceedInplementation(new object());
+        }
         #region Properties
 
         #region FieldsDataFromView
         public string NameField
         {
-            set { 
+            set
+            {
                 _nameField = value;
                 OnPropertyChanged();
             }
@@ -37,7 +54,8 @@ namespace CSharpLab4.ViewModel
         }
         public string SurnameField
         {
-            set { 
+            set
+            {
                 _surnameField = value;
                 OnPropertyChanged();
             }
@@ -45,7 +63,8 @@ namespace CSharpLab4.ViewModel
         }
         public string EmailField
         {
-            set { 
+            set
+            {
                 _emailField = value;
                 OnPropertyChanged();
             }
@@ -53,7 +72,8 @@ namespace CSharpLab4.ViewModel
         }
         public DateTime BirthDateField
         {
-            set { 
+            set
+            {
                 _birthDateField = value;
                 OnPropertyChanged();
             }
@@ -93,7 +113,7 @@ namespace CSharpLab4.ViewModel
         }
         public string IsBirthday
         {
-            get { if (_person == null) { return ""; } return _person.IsBirthday?"Today is your birtday!!!":""; }
+            get { if (_person == null) { return ""; } return _person.IsBirthday ? "Today is your birtday!!!" : ""; }
         }
         #endregion
 
@@ -106,11 +126,11 @@ namespace CSharpLab4.ViewModel
             }
         }
 
-        public RelayCommand<object> ConfirmCommand
+        public RelayCommand<object> EditCommand
         {
             get
             {
-                return _confirmCommand ?? (_confirmCommand = new RelayCommand<object>(ConfirmInplementation,
+                return _editCommand ?? (_editCommand = new RelayCommand<object>(EditInplementation,
                     o => CanExecuteConfirmCommand()));
             }
         }
@@ -178,11 +198,12 @@ namespace CSharpLab4.ViewModel
             }
         }
 
-        async private void ConfirmInplementation(object obj)
+        async private void EditInplementation(object obj)
         {
             LoaderManager.Instance.ShowLoader();
             bool result = await Task.Run(() => {
-                StationManager.DataStorage.AddUser(_person);  //TO DO try catch for dublicating users
+                _person.Guid = TableUpdate.userToChange;
+                StationManager.DataStorage.ChangeUser(_person);  //TO DO try catch for dublicating users
                 _person = null;
                 return true;
             });
@@ -201,12 +222,12 @@ namespace CSharpLab4.ViewModel
 
         private bool CanExecuteProceedCommand()
         {
-            return !string.IsNullOrWhiteSpace(NameField)&& !string.IsNullOrWhiteSpace(SurnameField)&& !string.IsNullOrWhiteSpace(EmailField);
+            return !string.IsNullOrWhiteSpace(NameField) && !string.IsNullOrWhiteSpace(SurnameField) && !string.IsNullOrWhiteSpace(EmailField);
         }
 
         private bool CanExecuteConfirmCommand()
         {
-            return _person==null ? false : true;
+            return _person == null ? false : true;
         }
     }
 }

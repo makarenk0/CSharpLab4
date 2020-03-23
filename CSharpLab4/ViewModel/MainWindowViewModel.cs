@@ -56,5 +56,6 @@ namespace CSharpLab4.ViewModel
             NavigationManager.Instance.Initialize(new InitializationNavigationModel(this));
             NavigationManager.Instance.Navigate(ViewType.UsersTable);
         }
+
     }
 }

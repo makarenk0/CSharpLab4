@@ -7,6 +7,7 @@ namespace CSharpLab4.Models
     [Serializable]
     class Person
     {
+        private Guid _guid;
         private string _name;
         private string _surname;
         private string _email;
@@ -19,6 +20,7 @@ namespace CSharpLab4.Models
 
         public Person(string name, string surname, string email, DateTime birthDate)
         {
+            _guid = Guid.NewGuid();
             Name = name;
             Surname = surname;
             Email = email;
@@ -26,15 +28,29 @@ namespace CSharpLab4.Models
         }
         public Person(string name, string surname, string email)
         {
+            _guid = Guid.NewGuid();
             Name = name;
             Surname = surname;
             Email = email;
         }
         public Person(string name, string surname, DateTime birthDate)
         {
+            _guid = Guid.NewGuid();
             Name = name;
             Surname = surname;
             BirthDate = birthDate;
+        }
+
+        public Guid Guid
+        {
+            get
+            {
+                return _guid;
+            }
+            set
+            {
+                _guid = value;
+            }
         }
 
         public string Name

@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="CSharpLab4.View.UserEditingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSharpLab4.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Enter your name: "/>
+        <TextBox Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Text ="{Binding NameField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Enter your surname: "/>
+        <TextBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Text ="{Binding SurnameField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Enter your e-mail: "/>
+        <TextBox Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Text ="{Binding EmailField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Enter your birth date: "/>
+        <DatePicker Width="150" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="1" VerticalContentAlignment="Center" HorizontalAlignment="Center" SelectedDate="{Binding BirthDateField}"></DatePicker>
+        <!-- Input end -->
+
+
+        <Label Target="{Binding ElementName=NameBlock}" Grid.Row="0" Grid.Column="1">Your name:</Label>
+        <TextBlock Name="NameBlock" Grid.Row="0" Grid.Column="1" Width="120" Height="30" Text="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+
+        <Label Target="{Binding ElementName=SurnameBlock}" Grid.Row="1" Grid.Column="1">Your surname:</Label>
+        <TextBlock Name="SurnameBlock" Grid.Row="1" Grid.Column="1" Width="120" Height="30" Text="{Binding Surname, Mode=OneWay}"></TextBlock>
+
+        <Label Target="{Binding ElementName=EmailBlock}" Grid.Row="2" Grid.Column="1">Your e-mail is:</Label>
+        <TextBlock Name="EmailBlock" Grid.Row="2" Grid.Column="1" Width="120" Height="30" Text="{Binding Email, Mode=OneWay}"></TextBlock>
+
+        <Label Target="{Binding ElementName=BirthDateBlock}" Grid.Row="3" Grid.Column="1">Your birth date is:</Label>
+        <TextBlock Name="BirthDateBlock" Grid.Row="3" Grid.Column="1" Width="120" Height="30" Text="{Binding BirthDate, Mode=OneWay}"></TextBlock>
+
+        <Label Target="{Binding ElementName=AdultBlock}" Grid.Row="4" Grid.Column="1">You are</Label>
+        <TextBlock Name="AdultBlock" Grid.Row="4" Grid.Column="1" Width="120" Height="30" Text="{Binding IsAdult, Mode=OneWay}"></TextBlock>
+
+        <Label Target="{Binding ElementName=SunSignBlock}" Grid.Row="5" Grid.Column="1">Your sun sign is:</Label>
+        <TextBlock Name="SunSignBlock" Grid.Row="5" Grid.Column="1" Width="120" Height="30" Text="{Binding SunSign, Mode=OneWay}"></TextBlock>
+
+        <Label Target="{Binding ElementName=ChineseSignBlock}" Grid.Row="6" Grid.Column="1">Your chinese sign is:</Label>
+        <TextBlock Name="ChineseSignBlock" Grid.Row="6" Grid.Column="1" Width="120" Height="30" Text="{Binding ChineseSign, Mode=OneWay}"></TextBlock>
+
+        <TextBlock Name="TodayBirthdayBlock" Grid.Row="7" Grid.Column="1" Width="120" Height="30" Text="{Binding IsBirthday, Mode=OneWay}"></TextBlock>
+
+        <!-- Buttons-->
+        <Button Name="ProceedButton" Width="150" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="1" Content="Proceed" Command="{Binding ProceedCommand}"></Button>
+        <Button Name="ConfirmButton" Width="150" Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="1" Content="Edit" Command="{Binding EditCommand}"></Button>
+        <Button Name="BackButton" Width="150" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="1" Content="Back" Command="{Binding BackCommand}"></Button>
+    </Grid>
+</UserControl>

@@ -2,6 +2,7 @@
 using CSharpLab4.View;
 using UserAddingView = CSharpLab4.View.UserAddingView;
 using UsersTableView = CSharpLab4.View.UsersTableView;
+using UserEditingView = CSharpLab4.View.UserEditingView;
 
 namespace CSharpLab4.Tools.Navigation
 {
@@ -22,9 +23,13 @@ namespace CSharpLab4.Tools.Navigation
                 case ViewType.UsersTable:
                     ViewsDictionary.Add(viewType, new UsersTableView());
                     break;
+                case ViewType.UserEditing:
+                    ViewsDictionary.Add(viewType, new UserEditingView());
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(viewType), viewType, null);
             }
+
         }
     }
 }

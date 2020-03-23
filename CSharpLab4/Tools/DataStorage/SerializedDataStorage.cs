@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CSharpLab4.Models;
@@ -10,6 +11,7 @@ namespace CSharpLab4.Tools.DataStorage
     internal class SerializedDataStorage:IDataStorage
     {
         private readonly List<Person> _users;
+      
 
         internal SerializedDataStorage()
         {
@@ -23,6 +25,27 @@ namespace CSharpLab4.Tools.DataStorage
             }
         }
 
+        public void ChangeUser(Person changedPerson)
+        {
+            Guid g = _users.Find(  //test
+            delegate (Person p)
+            {
+                return p.Guid == changedPerson.Guid;
+            }
+            ).Guid;
+            DeleteUser(g);
+            AddUser(changedPerson);
+        }
+
+        public Person GetUser(Guid guid)
+        {
+            return _users.Find(  //test
+            delegate (Person p)
+            {
+                return p.Guid == guid;
+            }
+            );
+        }
 
         public void AddUser(Person user)
         {
@@ -30,9 +53,16 @@ namespace CSharpLab4.Tools.DataStorage
             SaveChanges();
         }
 
-        public Person getLastAddedUser()
+        public void DeleteUser(Guid guid)
         {
-            return _users.Last();
+            foreach (Person user in _users)
+            {
+                if (user.Guid == guid)
+                {
+                    _users.Remove(user);
+                    break;
+                }
+            }
         }
 
         public List<Person> UsersList
@@ -44,6 +74,8 @@ namespace CSharpLab4.Tools.DataStorage
         {
             SerializationManager.Serialize(_users, FileFolderHelper.StorageFilePath);
         }
+
+      
     }
 }
 

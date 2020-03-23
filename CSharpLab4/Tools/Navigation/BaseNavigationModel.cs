@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CSharpLab4.Tools.DataStorage;
+using System.Collections.Generic;
 
 namespace CSharpLab4.Tools.Navigation
 {
@@ -28,6 +29,18 @@ namespace CSharpLab4.Tools.Navigation
             if (!ViewsDictionary.ContainsKey(viewType))
                 InitializeView(viewType);
             ContentOwner.Content = ViewsDictionary[viewType];
+
+            switch (viewType)
+            {
+                case ViewType.UsersTable:
+                    TableUpdate.Update();
+                    break;
+                case ViewType.UserEditing:
+                    TableUpdate.InitEdit();
+                    break;
+                default:
+                    break;
+            }
         }
 
         protected abstract void InitializeView(ViewType viewType);
