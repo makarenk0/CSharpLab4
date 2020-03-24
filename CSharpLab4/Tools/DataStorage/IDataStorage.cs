@@ -14,6 +14,8 @@ namespace CSharpLab4.Tools.DataStorage
 
         void DeleteUser(Guid guid);
 
+        void Generate_50_TestUsers();
+
         List<Person> UsersList { get; }
     }
 }

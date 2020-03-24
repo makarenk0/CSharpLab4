@@ -5,8 +5,6 @@ using CSharpLab4.Tools.Managers;
 using CSharpLab4.Tools.MVVM;
 using CSharpLab4.Tools.Navigation;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 

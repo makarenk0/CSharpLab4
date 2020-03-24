@@ -2,6 +2,7 @@
 using CSharpLab4.ViewModel.Registration;
 using System.Windows.Controls;
 
+
 namespace CSharpLab4.View
 {
     /// <summary>

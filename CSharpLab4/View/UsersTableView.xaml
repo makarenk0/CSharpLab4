@@ -2,9 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450" d:DesignWidth="1280"
              >
     <Grid>
         <Grid.RowDefinitions>
@@ -13,15 +13,131 @@
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=OneWay}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Surname" Binding="{Binding Surname, Mode=OneWay}"></DataGridTextColumn>
-                <DataGridTextColumn Header="E-mail" Binding="{Binding Email, Mode=OneWay}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Birth date" Binding="{Binding BirthDate, Mode=OneWay}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Is adult" Binding="{Binding IsAdult, Mode=OneWay}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Sun sign" Binding="{Binding SunSign, Mode=OneWay}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Chinese sign" Binding="{Binding ChineseSign, Mode=OneWay}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Birthday today" Binding="{Binding IsBirthday, Mode=OneWay}"></DataGridTextColumn>
-                
+                <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=OneWay}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="104">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Content, RelativeSource=
+                                         {RelativeSource Mode=TemplatedParent}}"/>
+                                <TextBox Text ="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl},Mode=FindAncestor}, Path=DataContext.NameFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Surname" Binding="{Binding Surname, Mode=OneWay}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="104">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Content, RelativeSource=
+                                         {RelativeSource Mode=TemplatedParent}}"/>
+                                <TextBox Text ="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl},Mode=FindAncestor}, Path=DataContext.SurnameFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="E-mail" Binding="{Binding Email, Mode=OneWay}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="104">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Content, RelativeSource=
+                                         {RelativeSource Mode=TemplatedParent}}"/>
+                                <TextBox Text ="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl},Mode=FindAncestor}, Path=DataContext.EmailFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Birth date" Binding="{Binding BirthDate, Mode=OneWay}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="104">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Content, RelativeSource=
+                                         {RelativeSource Mode=TemplatedParent}}"/>
+                                <DatePicker SelectedDate ="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl},Mode=FindAncestor}, Path=DataContext.BirthDateFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Is adult" Binding="{Binding IsAdult, Mode=OneWay}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="104">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Content, RelativeSource=
+                                         {RelativeSource Mode=TemplatedParent}}"/>
+                                <ComboBox Text ="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl},Mode=FindAncestor}, Path=DataContext.IsAdultFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100">
+                                    <TextBlock>All</TextBlock>
+                                    <TextBlock>Adult</TextBlock>
+                                    <TextBlock>Child</TextBlock>
+                                </ComboBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Sun sign" Binding="{Binding SunSign, Mode=OneWay}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="104">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Content, RelativeSource=
+                                         {RelativeSource Mode=TemplatedParent}}"/>
+                                <ComboBox Text ="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl},Mode=FindAncestor}, Path=DataContext.WesternZodiacFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100">
+                                    <TextBlock>All</TextBlock>
+                                    <TextBlock>Capricorn</TextBlock>
+                                    <TextBlock>Aquarius</TextBlock>
+                                    <TextBlock>Pisces</TextBlock>
+                                    <TextBlock>Aries</TextBlock>
+                                    <TextBlock>Taurus</TextBlock>
+                                    <TextBlock>Gemini</TextBlock>
+                                    <TextBlock>Cancer</TextBlock>
+                                    <TextBlock>Leo</TextBlock>
+                                    <TextBlock>Virgo</TextBlock>
+                                    <TextBlock>Libra</TextBlock>
+                                    <TextBlock>Scorpio</TextBlock>
+                                    <TextBlock>Sagittarius</TextBlock>
+                                </ComboBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Chinese sign" Binding="{Binding ChineseSign, Mode=OneWay}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="104">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Content, RelativeSource=
+                                         {RelativeSource Mode=TemplatedParent}}"/>
+                                <ComboBox Text ="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl},Mode=FindAncestor}, Path=DataContext.ChineseZodiacFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100">
+                                    <TextBlock>All</TextBlock>
+                                    <TextBlock>Rat</TextBlock>
+                                    <TextBlock>Ox</TextBlock>
+                                    <TextBlock>Tiger</TextBlock>
+                                    <TextBlock>Rabbit</TextBlock>
+                                    <TextBlock>Dragon</TextBlock>
+                                    <TextBlock>Snake</TextBlock>
+                                    <TextBlock>Horse</TextBlock>
+                                    <TextBlock>Goat</TextBlock>
+                                    <TextBlock>Monkey</TextBlock>
+                                    <TextBlock>Rooster</TextBlock>
+                                    <TextBlock>Dog</TextBlock>
+                                    <TextBlock>Pig</TextBlock>
+                                </ComboBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Birthday today" Binding="{Binding IsBirthday, Mode=OneWay}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical" Width="104">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding Content, RelativeSource=
+                                         {RelativeSource Mode=TemplatedParent}}"/>
+                                <ComboBox Text ="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl},Mode=FindAncestor}, Path=DataContext.IsBirthdayFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100">
+                                    <TextBlock>All</TextBlock>
+                                    <TextBlock>Yes</TextBlock>
+                                    <TextBlock>No</TextBlock>
+                                </ComboBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
+                </DataGridTextColumn>
+
                 <DataGridTemplateColumn Width="80" Header="Editing">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -38,7 +154,10 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="1" Width="100" Name="AddButton" Content="Add" Command="{Binding AddingCommand}"/>
+        <Button Margin="0 0 400 0" Grid.Row="2" Width="100" Name="AddButton" Content="Add" Command="{Binding AddingCommand}"/>
+        <Button Margin="200 0 0 0" Grid.Row="2" Width="100" Name="FilterButton" Content="Filter" Command="{Binding FilteringCommand}"/>
+        <Button Margin="600 0 0 0" Grid.Row="2" Width="100" Name="ClearFilterButton" Content="Clear Filter" Command="{Binding ClearingFilterCommand}"/>
+        
     </Grid>
    
 </UserControl>

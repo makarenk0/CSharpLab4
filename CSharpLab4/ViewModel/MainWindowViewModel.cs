@@ -4,7 +4,6 @@ using CSharpLab4.Tools.Managers;
 using CSharpLab4.Tools.MVVM;
 using CSharpLab4.Tools.Navigation;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace CSharpLab4.ViewModel
 {

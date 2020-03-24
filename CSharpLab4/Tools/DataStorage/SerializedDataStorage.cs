@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using CSharpLab4.Models;
 using CSharpLab4.Tools.Managers;
-using CSharpLab4.ViewModel.Registration;
 
 namespace CSharpLab4.Tools.DataStorage
 {
@@ -75,7 +74,20 @@ namespace CSharpLab4.Tools.DataStorage
             SerializationManager.Serialize(_users, FileFolderHelper.StorageFilePath);
         }
 
-      
+        public void Generate_50_TestUsers()
+        {
+            for(int i = 0; i<10; i++)
+            {
+                _users.Add(new Person("Oleg", "Olegov", "oleg@gmail.com", new DateTime(2001, 12, 10)));
+                _users.Add(new Person("Andrej", "Andrejev", "Andrej@gmail.com", new DateTime(1990, 5, 19)));
+                _users.Add(new Person("Dmitrij", "Dmitrov", "dima@gmail.com", new DateTime(2012, 1, 1)));
+                _users.Add(new Person("Jenia", "J", "jen@gmail.com", new DateTime(2019, 3, 10)));
+                _users.Add(new Person("Masha", "M", "ma@gmail.com", DateTime.Now.Date));
+            }
+            SaveChanges();
+        }
+
+
     }
 }
 
