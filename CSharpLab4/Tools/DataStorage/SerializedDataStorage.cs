@@ -62,6 +62,7 @@ namespace CSharpLab4.Tools.DataStorage
                     break;
                 }
             }
+            SaveChanges();
         }
 
         public List<Person> UsersList
